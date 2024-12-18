@@ -1,0 +1,25 @@
+name: LFS Setup
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up LFS
+      run: |
+        git lfs install
+        git lfs track "satsharmoo"
+        git add .gitattributes
+        git commit -m "Track large files with LFS"
+
+    - name: Commit Added Files
+      run: |
+        git add .
+        git commit -m "Add large files to LFS"
+        git push
